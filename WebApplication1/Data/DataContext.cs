@@ -11,7 +11,7 @@ namespace WebApplication1.Data
         public DataContext(DbContextOptions<DataContext> options)
         : base(options)
         {
-            Database.EnsureCreated();   // создаем базу данных при первом обращении
+            //Database.EnsureCreated();   // создаем базу данных при первом обращении
         }
     }
 }
