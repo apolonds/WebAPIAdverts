@@ -188,14 +188,15 @@ namespace WebApplication1.Controllers
         /// Deletes a specific announcement.
         /// </summary>
         /// <param name="id"></param>
+        /// <param name="userId"></param>
         /// <returns></returns>
         // DELETE: api/Announcements/5
-        [HttpDelete("{id}")]
+        [HttpDelete("{id},{userId}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> DeleteAnnouncement(Guid id)
+        public async Task<IActionResult> DeleteAnnouncement(Guid id, Guid userId)
         {
             if (_context.Announcements == null)
             {
@@ -208,7 +209,7 @@ namespace WebApplication1.Controllers
             }
 
             // Проверка, что пользователь является владельцем объявления
-            if (announcement.UserId != id)
+            if (announcement.UserId != userId)
             {
                 return BadRequest("Нельзя удалять объявления других пользователей.");
             }
