@@ -29,11 +29,6 @@ namespace WebAPIAdverts.Service
             return _mapper.Map<AnnouncementDTO>(announcement);
         }
 
-        //public async Task<IEnumerable<AnnouncementDTO>> GetAllAnnouncements()
-        //{
-        //    var announcements = await _announcementRepository.GetAll();
-        //    return _mapper.Map<IEnumerable<AnnouncementDTO>>(announcements);
-        //}
         public async Task<IEnumerable<AnnouncementDTO>> GetAllAnnouncements(int? minRating, string? sortBy, string? sortOrder)
         {
             var announcements = await _announcementRepository.GetFilteredAnnouncements(minRating);

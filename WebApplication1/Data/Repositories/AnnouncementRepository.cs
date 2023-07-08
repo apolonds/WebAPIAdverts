@@ -19,11 +19,6 @@ namespace WebAPIAdverts.Data.Repositories
             return await _dbContext.Announcements.FirstOrDefaultAsync(a => a.Id == id);
         }
 
-        public async Task<IEnumerable<Announcement>> GetAll()
-        {
-            return await _dbContext.Announcements.ToListAsync();
-        }
-
         public async Task<IEnumerable<Announcement>> GetByUserId(Guid userId)
         {
             return await _dbContext.Announcements.Where(a => a.UserId == userId).ToListAsync();
@@ -46,6 +41,7 @@ namespace WebAPIAdverts.Data.Repositories
             _dbContext.Announcements.Remove(announcement);
             await _dbContext.SaveChangesAsync();
         }
+
         public async Task<IEnumerable<Announcement>> GetFilteredAnnouncements(int? minRating)
         {
             var query = _dbContext.Announcements.AsQueryable();

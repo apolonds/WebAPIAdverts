@@ -27,6 +27,11 @@ namespace WebAPIAdverts.Controllers
         //    var announcementDtos = await _mediator.GetAllAnnouncements();
         //    return Ok(announcementDtos);
         //}
+
+        /// <summary>
+        /// Get all adverts.
+        /// </summary>
+        // GET: api/Announcements
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(StatusCodes.Status200OK)]
