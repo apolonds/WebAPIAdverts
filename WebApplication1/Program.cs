@@ -1,7 +1,11 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using System.Reflection;
-using WebApplication1.Data;
+using WebAPIAdverts.Data;
+using WebAPIAdverts.Data.Repositories;
+using WebAPIAdverts.Data.Repositories.IRepositories;
+using WebAPIAdverts.Mappings;
+using WebAPIAdverts.Service;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -34,6 +38,10 @@ builder.Services.AddSwaggerGen(options =>
     var xmlFilename = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
     options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, xmlFilename));
 });
+
+builder.Services.AddScoped<IMediator, Mediator>();
+builder.Services.AddScoped<IAnnouncementRepository, AnnouncementRepository>();
+builder.Services.AddAutoMapper(typeof(MappingProfiles));
 
 // получаем строку подключения из файла конфигурации
 string connection = builder.Configuration.GetConnectionString("DefaultConnection");

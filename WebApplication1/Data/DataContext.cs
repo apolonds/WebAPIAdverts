@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using WebApplication1.Models;
+using WebAPIAdverts.Models;
 
-namespace WebApplication1.Data
+namespace WebAPIAdverts.Data
 {
     public class DataContext : DbContext
     {
@@ -9,9 +9,24 @@ namespace WebApplication1.Data
         public DbSet<Announcement> Announcements { get; set; }
 
         public DataContext(DbContextOptions<DataContext> options)
-        : base(options)
+        : base(options){}
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            //Database.EnsureCreated();   // создаем базу данных при первом обращении
+            modelBuilder.Entity<Announcement>()
+                .HasKey(a => a.Id);
+
+            modelBuilder.Entity<Announcement>()
+                .HasIndex(a => a.Id)
+                .IsUnique();
+
+            modelBuilder.Entity<Announcement>()
+                .HasIndex(a => a.Number);
+
+            modelBuilder.Entity<Announcement>()
+                .HasIndex(a => a.Rating);
+
+            base.OnModelCreating(modelBuilder);
         }
     }
 }

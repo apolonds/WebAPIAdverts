@@ -1,4 +1,4 @@
-﻿namespace WebApplication1.Models
+﻿namespace WebAPIAdverts.Models
 {
     public class User
     {

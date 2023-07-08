@@ -12,8 +12,8 @@ using WebAPIAdverts.Data;
 namespace WebAPIAdverts.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20230702093825_AddADTable")]
-    partial class AddADTable
+    [Migration("20230706082355_CreateIndexes")]
+    partial class CreateIndexes
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -25,7 +25,7 @@ namespace WebAPIAdverts.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("WebApplication1.Models.Announcement", b =>
+            modelBuilder.Entity("WebAPIAdverts.Models.Announcement", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -56,10 +56,17 @@ namespace WebAPIAdverts.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("Id")
+                        .IsUnique();
+
+                    b.HasIndex("Number");
+
+                    b.HasIndex("Rating");
+
                     b.ToTable("Announcements");
                 });
 
-            modelBuilder.Entity("WebApplication1.Models.User", b =>
+            modelBuilder.Entity("WebAPIAdverts.Models.User", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
